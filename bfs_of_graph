@@ -1,0 +1,46 @@
+Breadth First Search (BFS) is a fundamental graph traversal algorithm . 
+It involves visiting all the connected nodes of a graph in a level-by-level manner. 
+vector<int> bfsofGraph(int v,vector<int> adj[]){
+    int vis[v]={0};
+    vis[0]=1;
+    queue<int> q;
+    q.push(0);
+    vector<int> bfs;
+    while(!q.empty()){
+        int node = q.front();
+        q.pop();
+        bfs.push_back(node);
+
+        for(auto i : adj[node]){
+            if(!vis[i]){
+                vis[i]=1;
+                q.push(i);
+            }
+        }
+    }
+    return bfs;
+}
+int main(){
+    int v=5;
+    vector<int> adj[v];     
+    adj[0].push_back(1);
+    adj[0].push_back(4);
+    adj[1].push_back(0);
+    adj[1].push_back(2);
+    adj[1].push_back(4);
+    adj[2].push_back(1);
+    adj[2].push_back(3);
+    adj[2].push_back(4);
+    adj[3].push_back(2);
+    adj[3].push_back(4);
+    adj[4].push_back(1);
+    adj[4].push_back(1);
+    adj[4].push_back(2);
+    adj[4].push_back(3);
+    vector<int> bfs=bfsofGraph(v,adj);
+    for(int i : bfs){
+        cout<<i<<" ";
+    }
+    cout<<endl;
+    return 0;
+}
