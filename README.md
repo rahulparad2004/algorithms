@@ -1,50 +1,49 @@
-Topological sorting for Directed Acyclic Graph (DAG) is a linear ordering of vertices such 
-that for every directed edge u-v, vertex u comes before v in the ordering.
+Overview
 
+This repository contains C++ implementations of two fundamental graph traversal algorithms:
 
+Breadth-First Search (BFS)
 
-#topological sort
-vector<int> topoSort(int V, vector<int> adj[]) {
-    vector<int> indegree(V, 0);
-    // Calculate indegree of each vertex
-    for (int i = 0; i < V; i++) {
-        for (auto j : adj[i]) {
-            indegree[j]++;
-        }
-    }
-    queue<int> q;
-    for (int i = 0; i < V; i++) {
-        if (indegree[i] == 0)
-            q.push(i);
-    }
-    vector<int> ans;
-    while (!q.empty()) {
-        int front = q.front();
-        q.pop();
-        ans.push_back(front);
-        for (auto ele : adj[front]) {
-            indegree[ele]--;
-            if (indegree[ele] == 0)
-                q.push(ele);
-        }
-    }
-    return ans;
-}
+Depth-First Search (DFS)
 
-int main() {
-    int V = 6;
-    vector<int> adj[V];
-    adj[5].push_back(2);
-    adj[5].push_back(0);
-    adj[4].push_back(0);
-    adj[4].push_back(1);
-    adj[2].push_back(3);
-    adj[3].push_back(1);
-    vector<int> result = topoSort(V, adj);
-    cout << "Topological Sort: ";
-    for (int i : result) {
-        cout << i << " ";
-    }
-    cout << endl;
-    return 0;
-}
+These algorithms are essential for exploring graphs and trees and are widely used in various applications, such as pathfinding, cycle detection, and network analysis.
+
+Features
+
+Implementation of BFS using a queue (iterative approach)
+
+Implementation of DFS using both recursive and iterative methods
+
+Support for both directed and undirected graphs
+
+Input handling for adjacency list representation
+
+Example test cases to demonstrate functionality
+
+BFS Algorithm
+
+Breadth-First Search (BFS) explores all nodes at the present depth level before moving on to nodes at the next depth level. It is implemented using a queue.
+
+BFS Pseudocode
+
+BFS(Graph, start):
+    Create a queue and enqueue the start node
+    Mark start node as visited
+    While queue is not empty:
+        Dequeue a node from the front
+        Process the node
+        Enqueue all unvisited adjacent nodes and mark them as visited
+
+DFS Algorithm
+
+Depth-First Search (DFS) explores as far as possible along each branch before backtracking. It can be implemented using recursion or an explicit stack.
+
+DFS Pseudocode (Recursive)
+
+DFS(Graph, node, visited):
+    Mark node as visited
+    Process the node
+    For each adjacent unvisited node:
+        Call DFS recursively on the adjacent node
+
+DFS Pseudocode (Iterative)
